@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '5^v@viuxva()12%gtzu!6h*53ivt^n+r+t8p9ste$frs2xir$2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bytemethod-ddns.herokuapp.com']
 
 
 # Application definition
