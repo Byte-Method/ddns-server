@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    app:
+        build: .
+        restart: always
+        environment:
+            DJANGO_SECRET_KEY: ${SECRET_KEY}
+            CF_API_KEY: ${CF_API_KEY}
+            DATABASE_URL: psql://postgres:${POSTGRES_PASWORD}@db:5432/postgres
+        depends_on:
+            - db
+    
+    db:
+        image: postgres:13
+        restart: always
+        environment:
+            POSTGRES_PASWORD: ${POSTGRES_PASWORD}
