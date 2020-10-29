@@ -1,1 +1,1 @@
-web: gunicorn bytemethod_ddns.wsgi
+web: gunicorn bytemethod_ddns.wsgi --log-file -

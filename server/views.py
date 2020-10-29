@@ -1,3 +1,28 @@
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseBadRequest
+from server.decorators import basic_auth
+from server.models import Record
+from server import utils
 
-# Create your views here.
+@basic_auth
+def index(request, ip):
+
+    try:
+        protocol, ip_address = utils.get_ip_address(ip)
+    except ValueError:
+        return HttpResponseBadRequest('Invalid IP', content_type='text/plain')
+
+    if not ip_address.is_global or ip_address.is_multicast:
+        return HttpResponse('Forbidden IP', status=422, content_type='text/plain')
+
+    record = Record(
+        client = request.user,
+        protocol = protocol,
+        remote_ip = request.META['REMOTE_ADDR'],
+        update_ip = str(ip_address)
+    )
+
+    record.save()
+
+    utils.update_cloudflare(request.user, record)
+
+    return HttpResponse(ip, content_type='text/plain')
