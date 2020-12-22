@@ -1,5 +1,5 @@
 """
-ASGI config for bytemethod_ddns project.
+ASGI config for project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bytemethod_ddns.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 
 application = get_asgi_application()

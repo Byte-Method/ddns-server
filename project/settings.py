@@ -5,10 +5,13 @@ from django.core.management.utils import get_random_secret_key
 
 env = environ.Env(
     DEBUG = (bool, False),
-    SECRET_KEY = (str, get_random_secret_key()),
+    SECRET_KEY = (str, str(get_random_secret_key())),
     LOG_LEVEL = (str, 'WARNING'),
     DATABASE_URL = (str, 'sqlite:///db.sqlite3')
 )
+
+# reading .env file
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'bytemethod_ddns.urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
@@ -77,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bytemethod_ddns.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
