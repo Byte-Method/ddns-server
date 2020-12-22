@@ -10,6 +10,12 @@ pfSense comes with a built-in dynamic DNS client that supports custom URLs and H
 
 # Install
 
+Generate secret key:
+
+```
+docker run --rm -it ddns-server python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+```
+
 To use the admin area, the static files must be collected, and the database initialized.
 
 E.g., if you're using the provided `docker-compose.yml`:
