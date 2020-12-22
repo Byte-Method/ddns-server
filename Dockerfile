@@ -24,16 +24,24 @@ FROM base AS runtime
 COPY --from=python-deps /.venv /.venv
 ENV PATH="/.venv/bin:$PATH"
 
-# Create and switch to a new user
-RUN useradd --create-home app
-WORKDIR /home/app
-USER app
+WORKDIR /app
 
 # Install application into container
 COPY . .
 
+RUN chmod +x manage.py
+
+# Create and switch to a new user
+RUN useradd app
+RUN chown -R app:app /app
+
+USER app
+
+RUN mkdir /app/static/
+
+VOLUME /app/static/
+
+EXPOSE 8000
+
 # Run the application
-
-EXPOSE 5000
-
-CMD [ "gunicorn", "--worker-tmp-dir=/dev/shm", "--workers=2", "--threads=4", "--worker-class=gthread", "--bind=0.0.0.0:5000", "--log-file=-", "project.wsgi:application"]
+CMD [ "gunicorn", "--worker-tmp-dir=/dev/shm", "--workers=2", "--threads=4", "--worker-class=gthread", "--bind=0.0.0.0", "--log-file=-", "project.wsgi:application"]

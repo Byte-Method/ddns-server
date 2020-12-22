@@ -1,9 +1,16 @@
 import uuid
+from string import ascii_letters, digits
+
 from django.db import models
+from django.utils.crypto import get_random_string
+
+
+def get_random_key():
+	return get_random_string(length=32, allowed_chars=ascii_letters+digits)
 
 class Client(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4)
-    key = models.CharField(max_length=32)
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    key = models.CharField(max_length=32, default=get_random_key)
     name = models.CharField(max_length=128)
     is_active = models.BooleanField(default=True)
     domain = models.CharField(max_length=253)

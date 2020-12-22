@@ -5,13 +5,11 @@ from django.core.management.utils import get_random_secret_key
 
 env = environ.Env(
     DEBUG = (bool, False),
-    SECRET_KEY = (str, str(get_random_secret_key())),
+    DJANGO_SECRET_KEY = (str, str(get_random_secret_key())),
+    DJANGO_ALLOWED_HOSTS = (tuple, ('127.0.0.1')),
     LOG_LEVEL = (str, 'WARNING'),
     DATABASE_URL = (str, 'sqlite:///db.sqlite3')
 )
-
-# reading .env file
-environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,11 +18,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env('DJANGO_ALLOWED_HOSTS')
 
 LOGGING = {
     'version': 1,
@@ -136,4 +134,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #      "staticfiles",]
 
 #MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

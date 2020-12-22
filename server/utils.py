@@ -6,13 +6,15 @@ from .models import Record
 def get_ip_address(value):
     obj = ip_address(value)
 
+    protocol = None
+
     if isinstance(obj, IPv4Address):
         protocol = Record.PROTOCOL_IPV4
     
     if isinstance(obj, IPv6Address):
         protocol = Record.PROTOCOL_IPV6
 
-    return protocol, obj
+    return (protocol, obj)
 
 def update_cloudflare(client, ddns_record):
     cf = Cloudflare.CloudFlare()
