@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     path('update/<str:ip>', csrf_exempt(views.index)),
-    path('traefik-forwardedauth-acmeproxy', csrf_exempt(views.list_clients))
+    path('traefik-forwardedauth-acmeproxy', csrf_exempt(views.traefik_forwardedauth_acmeproxy))
 ]
