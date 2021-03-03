@@ -5,13 +5,13 @@ from server.models import Client, Record
 class RecordInline(admin.TabularInline):
     model = Record
 
-    def has_add_permission(self, request):
+    def has_add_permission(self, request, obj):
         return False
 
-    def has_change_permission(self, request):
+    def has_change_permission(self, request, obj = None):
         return False
 
-    def has_delete_permission(self, request):
+    def has_delete_permission(self, request, obj = None):
         return False
 
 
