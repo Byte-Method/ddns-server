@@ -20,7 +20,7 @@ class RecordAdmin(admin.ModelAdmin):
     actions = None
     list_display_links = None
     list_select_related = ('client',)
-    list_display = ('update_ip', 'remote_ip', 'client__name', 'client__uuid', 'updated_on')
+    list_display = ('update_ip', 'remote_ip', 'client', 'updated_on')
     list_filter = ('client__name', 'protocol')
 
     def has_add_permission(self, request):
