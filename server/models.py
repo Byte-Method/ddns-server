@@ -16,6 +16,15 @@ class Client(models.Model):
     domain = models.CharField(max_length=253)
     cf_zone = models.CharField(max_length=255)
 
+    def latest_record(self, filter_ip = None):
+        if filter_ip:
+            return Record.objects.filter(client=self, update_ip = filter_ip).latest('updated_on')
+        
+        return Record.objects.filter(client=self).latest('updated_on')
+    
+    def __str__(self):
+        return f'{self.name} ({self.uuid})'
+
 
 class Record(models.Model):
     PROTOCOL_IPV4 = 'ipv4'
@@ -37,3 +46,6 @@ class Record(models.Model):
     
     def is_ipv6(self):
         return self.protocol == self.PROTOCOL_IPV6
+
+    def __str__(self):
+        return self.update_ip
