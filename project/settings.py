@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'project.middleware.CloudflareMiddleware'
+    'project.middleware.CloudflareMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
