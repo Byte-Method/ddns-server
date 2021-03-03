@@ -5,6 +5,15 @@ from server.models import Client, Record
 class RecordInline(admin.TabularInline):
     model = Record
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request):
+        return False
+
 
 class RecordAdmin(admin.ModelAdmin):
     date_hierarchy = 'updated_on'
