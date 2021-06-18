@@ -35,5 +35,7 @@ jobs:
           tags: ghcr.io/byte-method/ddns-server:latest
           cache-from: type=registry,ref=byte-method/ddns-server:latest
           cache-to: type=inline
+          secrets: |
+            GIT_AUTH_TOKEN=${{ github.token }}
         
       
