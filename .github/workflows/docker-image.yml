@@ -52,7 +52,7 @@ jobs:
           push: true
           #tags: ghcr.io/byte-method/ddns-server:latest
           tags: "${{env.IMAGE_ID}}:${{env.VERSION}}"
-          cache-from: "type=registry,ref=${{ env.IMAGE_ID }}:latest"
-          cache-to: type=inline
+          #cache-from: "type=registry,ref=${{ env.IMAGE_ID }}:latest"
+          #cache-to: type=inline
         
       
