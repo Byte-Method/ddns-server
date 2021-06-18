@@ -49,7 +49,7 @@ jobs:
           context: .
           push: true
           #tags: ghcr.io/byte-method/ddns-server:latest
-          tags: ${IMAGE_ID}:${VERSION}
+          tags: ${{env.IMAGE_ID}}:${{env.VERSION}}
           cache-from: type=registry,ref=ghcr.io/byte-method/ddns-server:latest
           cache-to: type=inline
         
