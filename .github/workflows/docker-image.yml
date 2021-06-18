@@ -42,6 +42,8 @@ jobs:
           [ "$VERSION" == "main" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
+          echo "IMAGE_ID=${IMAGE_ID}" >> $GITHUB_ENV
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
       -
         name: Build and push
         uses: docker/build-push-action@v2
@@ -49,8 +51,8 @@ jobs:
           context: .
           push: true
           #tags: ghcr.io/byte-method/ddns-server:latest
-          tags: ${{env.IMAGE_ID}}:${{env.VERSION}}
-          cache-from: type=registry,ref=ghcr.io/byte-method/ddns-server:latest
+          tags: "${{env.IMAGE_ID}}:${{env.VERSION}}"
+          cache-from: "type=registry,ref=${{ env.IMAGE_ID }}:latest"
           cache-to: type=inline
         
       
